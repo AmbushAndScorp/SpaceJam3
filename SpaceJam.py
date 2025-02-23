@@ -5,6 +5,7 @@ from spaceStation import Station
 from spaceship import Spaceship
 from drones import Drone
 import DefensePaths as DefPath
+import direct.task
 
 class myApp(ShowBase):
     def __init__(self):
@@ -25,7 +26,7 @@ class myApp(ShowBase):
 
         self.spaceStation = Station(self.loader, "Assets/Space Station/spaceStation.x", self.render, 'Station', "Assets/Space Station/SpaceStation1_NM.png", (1500, -100, 150), 40)
 
-        self.player = Spaceship(self.loader, "Assets/Spaceships/Dumbledore.x", self.render, 'Player', "Assets/Spaceships/spacejet_N.png", (1000, 1200, -50), 50)
+        self.player = Spaceship(self.loader, "Assets/Spaceships/Dumbledore.x", self.render, 'Player', "Assets/Spaceships/spacejet_N.png", (1000, 1200, -50), 50, self.taskMgr, self.render)
 
         fullCycle = 60
         circSpace = 0
@@ -43,7 +44,6 @@ class myApp(ShowBase):
             circSpace += 0.167
         
         self.SetCamera()
-        Spaceship.keyBinds(self)
         
     def DrawBaseballSeams(self, centralObject, droneName, step, numSeams, radius = 1):
         unitVec = DefPath.BaseballSeams(step, numSeams, B=0.4)
